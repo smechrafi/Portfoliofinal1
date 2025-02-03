@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Épreuve E5</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Open Sans', sans-serif;
+            color: white;
+            /* Supprimé les propriétés background en conflit */
+        }
+
+        /* Styles pour la superposition sombre */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Overlay semi-transparent */
+            z-index: -1;
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* Changé pour être derrière l'overlay */
+            object-fit: cover;
+        }
+
+        /* Le reste des styles reste identique */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            background: black;
+            padding: 10px 20px;
+            border-radius: 0 0 10px 10px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .navbar a {
+            color: white;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+            padding: 5px 0;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            position: relative;
+            margin-top: 80px;
+            padding: 20px;
+            width: 80%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            /* Ajout d'une propriété overflow pour permettre le défilement */
+            overflow-y: auto;
+        }
+
+        .section-block {
+            background: rgba(0, 0, 0, 0.7); /* Fond plus foncé pour meilleure lisibilité */
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            width: auto;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .section-block h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .section-block h4 {
+            color: white;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .section-block p {
+            text-align: justify;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .container-btn {
+            margin: 20px 0;
+        }
+
+        .container-btn ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 0;
+        }
+
+        .container-btn a {
+            text-decoration: none;
+            display: block;
+        }
+
+        .container-btn li {
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.8), rgba(128, 128, 128, 0.8));
+            padding: 15px 30px;
+            border-radius: 5px;
+            color: black;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container-btn li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        .separator {
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 40px 0;
+        }
+
+        .data-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+        }
+
+        .data-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .data-card h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .data-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .data-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.8), rgba(128, 128, 128, 0.8));
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .data-card a:hover {
+            background: linear-gradient(45deg, rgba(255, 255, 255, 1), rgba(128, 128, 128, 1));
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            animation: fadeIn 1s ease-in-out;
+            clear: both; /* Empêche le chevauchement */
+        }
+
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item.left::after {
+            right: -10px;
+        }
+
+        .timeline-item.right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            margin-bottom: 40px; /* Espacement entre les éléments */
+        }
+
+        .timeline-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .timeline-content ul li {
+            margin-bottom: 10px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media queries pour la responsivité */
+        @media (max-width: 768px) {
+            .content {
+                width: 90%;
+                padding: 10px;
+                margin-top: 120px; /* Plus d'espace pour le menu sur mobile */
+            }
+
+            .navbar {
+                padding: 5px 10px;
+            }
+
+            .navbar a {
+                margin: 5px 10px;
+                font-size: 12px;
+            }
+
+            .section-block {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video id="video-background" autoplay muted loop playsinline>
+        <source src="black.mp4" type="video/mp4">
+    </video>
+
+    <nav class="navbar">
+        <a href="index.html">Accueil</a>
+        <a href="Profil.html">Profil</a>
+        <a href="Entreprise.html">Entreprise</a>
+        <a href="Projets.html">Projets</a>
+        <a href="Veille.html">Veille</a>
+        <a href="epreuve5.html">E5</a>
+        <a href="epreuve6.html">E6</a>
+    </nav>
+
+    <div class="content">
+        <section class="veille-section">
+            <h1>Épreuve E6 - Cybersécurité des Services Informatiques</h1>
+            <hr class="separator">
+            <h2>Évaluation des compétences en services informatiques</h2>
+            <p>
+                L'épreuve E6 évalue les compétences acquises en matière de cybersécurité des services informatiques.  
+            </p>
+            <p>Cette épreuve permet de démontrer la capacité à protéger et sécuriser les systèmes d'information tout en assurant la continuité de service.</p>
+        </section>
+
+
+            <hr class="separator">
+        </section>
+
+    <div class="content">
+    <div class="section-block">
+        <h2>A propos</h2>
+        <h4>Description :</h4>
+        <p>Cette épreuve vise à évaluer, d’une part, le degré d’appropriation de son parcours de
+            professionnalisation et, d’autre part, les compétences acquises par le candidat dans le domaine de la
+            gestion du patrimoine informatique d’une organisation. </p>
+            <div class="container-btn">
+                <ul>
+                    <br>
+
+                    <a href="BTS_SIO_E6.pdf">
+                        <li>Documentation E6</li>
+                    </a>
+                    <a href="Environnement technologique dapprentissagesisr1.pdf">
+                        <li>Environnement technologique</li>
+                    </a>
+                </ul>
+        </div>
+    </div>
+</body>
+</html>

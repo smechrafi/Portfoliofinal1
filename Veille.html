@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Technologique</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: auto; 
+            font-family: 'Open Sans', sans-serif;
+            color: white;
+            background: url('black.mp4') no-repeat;
+            background-size: cover;
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            background: black;
+            padding: 10px 20px;
+            border-radius: 0 0 10px 10px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding-top: 100px; 
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .veille-section {
+            margin-bottom: 40px;
+        }
+
+        .veille-section h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .veille-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .veille-section p {
+            text-align: center; 
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+        }
+
+        .separator {
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 40px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .article-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+        }
+
+        .article-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .article-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .article-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.8), rgba(128, 128, 128, 0.8));
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .article-card a:hover {
+            background: linear-gradient(45deg, rgba(255, 255, 255, 1), rgba(128, 128, 128, 1));
+        }
+    </style>
+</head>
+<body>
+    <video id="video-background" autoplay muted loop>
+        <source src="black.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <nav class="navbar">
+        <a href="index.html">Accueil</a>
+        <a href="Profil.html">Profil</a>
+        <a href="Entreprise.html">Entreprise</a>
+        <a href="Projets.html">Projets</a>
+        <a href="Veille.html">Veille</a>
+        <a href="epreuve5.html">E5</a>
+        <a href="epreuve6.html">E6</a>
+    </nav>
+
+    <div class="content">
+        <section class="veille-section">
+            <h1>Veille Technologique</h1>
+            <hr class="separator">
+            <h2>Ma veille technologique et mes outils</h2>
+            <p>
+                Pour effectuer ma veille technologique, j’utilise « Google Alertes », qui me crée des alertes toutes les semaines. Celui-ci me permet d’être toujours au courant de toutes les actualités que je souhaite. J’ai ajouté à celui-ci, différentes sources telles que : ANSSI, Le Monde Informatique, etc.
+            </p>
+            <p>Pour ma veille technologique, j'ai choisi <strong>La Blockchain</strong>.</p>
+        </section>
+
+        <section class="veille-section">
+            <h2>La blockchain c’est quoi ?</h2>
+            <p>
+                Développée à partir de 2008, la blockchain est, en premier lieu, une technologie de stockage et de transmission d’informations. Cette technologie offre de hauts standards de transparence et de sécurité car elle fonctionne sans organe central de contrôle. Plus concrètement, la blockchain permet à ses utilisateurs connectés en réseau de partager des données sans intermédiaire.
+            </p>
+            <hr class="separator">
+        </section>
+
+        <section class="veille-section">
+            <h2>Mes articles</h2>
+            <div class="grid">
+                <article class="article-card">
+                    <h3>Blockchain : SpaceChain et Velas font dans la grande vitesse</h3>
+                    <p>En amenant la blockchain dans l’espace, SpaceChain a validé la création d’une infrastructure satellite décentralisée. Cette stratégie permet à la technologie d’atteindre son plein potentiel d’immuabilité et de sécurité.</p>
+                    <a href="https://www.cointribune.com/blockchain-spacechain-et-velas-font-dans-la-grande-vitesse/" target="_blank">Plus d'informations</a>
+                </article>
+
+                <article class="article-card">
+                    <h3>La blockchain, solution ultime pour sécuriser la billetterie ?</h3>
+                    <p>Le secteur de la billetterie a le vent en poupe. L’achat de billets en ligne n’a jamais été aussi populaire que ces dernières années. Pour simplifier et sécuriser au mieux ces transactions, il est possible d’utiliser la blockchain.</p>
+                    <a href="https://solutions.lesechos.fr/ils-en-parlent/la-blockchain-solution-ultime-pour-securiser-la-billetterie-35137/" target="_blank">Plus d'informations</a>
+                </article>
+
+                <article class="article-card">
+                    <h3>Blockchain, le futur big bang numérique ?</h3>
+                    <p>Aurélien Onimus, cofondateur et CEO de Seein-Apps, revient sur l'intérêt des cryptomonnaies, de la blockchain et leurs applications en BtoB.</p>
+                    <br>
+                    <br>
+                    <a href="https://www.ecommercemag.fr/Thematique/techno-ux-1226/Breves/Blockchain-le-futur-big-bang-numerique-Quand-investir-en-crypto-377274.htm" target="_blank">Plus d'informations</a>
+                </article>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

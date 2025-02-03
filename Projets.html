@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: auto; /* Permet le défilement de la page */
+            font-family: 'Open Sans', sans-serif;
+            color: white;
+            background: url('black.mp4') no-repeat;
+            background-size: cover;
+        }
+
+       
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            background: black;
+            padding: 10px 20px;
+            border-radius: 0 0 10px 10px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding-top: 100px; /* Espace pour éviter que le contenu soit caché sous la navbar */
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .logo {
+            display: block;
+            margin: 20px auto;
+            width: 300px; /* Ajuste selon besoin */
+            max-width: 100%; /* Empêche de dépasser la taille du conteneur */
+            height: auto; /* Garde les proportions */
+        }
+
+        .entreprise-section {
+            margin-bottom: 40px;
+        }
+
+        .entreprise-section h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .entreprise-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .entreprise-section p {
+            text-align: center; /* Centrage du texte */
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto 20px auto; /* Centrage et espacement */
+        }
+
+        .separator {
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 40px 0;
+        }
+
+        .data-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+        }
+
+        .data-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .data-card h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .data-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .data-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.8), rgba(128, 128, 128, 0.8));
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .data-card a:hover {
+            background: linear-gradient(45deg, rgba(255, 255, 255, 1), rgba(128, 128, 128, 1));
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            animation: fadeIn 1s ease-in-out;
+            clear: both; /* Empêche le chevauchement */
+        }
+
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item.left::after {
+            right: -10px;
+        }
+
+        .timeline-item.right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            margin-bottom: 40px; /* Espacement entre les éléments */
+        }
+
+        .timeline-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .timeline-content ul li {
+            margin-bottom: 10px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <video id="video-background" autoplay muted loop>
+        <source src="black.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <nav class="navbar">
+        <a href="index.html">Accueil</a>
+        <a href="Profil.html">Profil</a>
+        <a href="Entreprise.html">Entreprise</a>
+        <a href="Projets.html">Projets</a>
+        <a href="Veille.html">Veille</a>
+        <a href="epreuve5.html">E5</a>
+        <a href="epreuve6.html">E6</a>
+    </nav>
+
+    <div class="content"> 
+        <center><h1>En Cours !</h1></center>
